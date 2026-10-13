@@ -25,27 +25,26 @@ Astro + shadcn/ui + GSAP, with design skills and MCP servers preconfigured.
 
 A template repo, not a project. It holds the Claude Code setup I reuse on every web project — design skills, MCP servers, and project conventions — so a new site starts with all of it already in place instead of being rebuilt by hand.
 
-One script scaffolds a fresh Astro + shadcn project anywhere on disk and drops that setup into it.
+Create a repo from this template, run one script, and it scaffolds Astro + shadcn in place around that setup.
 
 ## Quick start
 
+Click **Use this template** on GitHub (or `gh repo create my-site --template OmarCaja/astro-shadcn-claude-starter --clone`), then:
+
 ```bash
-git clone https://github.com/OmarCaja/astro-shadcn-claude-starter.git
-cd astro-shadcn-claude-starter
-./new-project.sh ~/p/my-site
+cd my-site
+./new-project.sh
 ```
 
-> Keep the template clone around and reuse it for every new project. Run `git pull` in it now and then to pick up skill updates.
-
-The last path segment is the project name; missing parent folders are created for you. Relative paths work too (`../my-site`).
+The folder name becomes the project name. The script runs once: it deletes itself and the template-only files (`README.md`, `CLAUDE.md`, `LICENSE`, `.claude/settings.json`) and leaves you to commit the result.
 
 ## How it works
 
 ```mermaid
 flowchart LR
-    A["./new-project.sh path/name"] --> B["shadcn init -t astro\n(scaffolds Astro + shadcn/ui)"]
-    B --> C["copy .agents/ .claude/\n.mcp.json + skills-lock.json"]
-    C --> D["git init\npnpm add gsap"]
+    A["./new-project.sh"] --> B["shadcn init -t astro\n(in a temp dir)"]
+    B --> C["merge into this folder\nremove template-only files"]
+    C --> D["pnpm add gsap"]
     D --> E(("Ready project"))
 ```
 
@@ -79,14 +78,14 @@ Skills live in `.agents/skills/` and are symlinked into `.claude/skills/`. Versi
 ├── .claude/skills/      # symlinks Claude Code reads
 ├── .claude/settings.json  # shellcheck hook for new-project.sh (template only)
 ├── .mcp.json            # MCP servers
-├── CLAUDE.md            # this repo's own conventions (not copied to new projects)
+├── CLAUDE.md            # this repo's own conventions (removed on setup)
 ├── skills-lock.json     # pinned skill versions
-└── new-project.sh       # scaffold script
+└── new-project.sh       # one-shot setup script (deletes itself)
 ```
 
 ## Requirements
 
-[pnpm](https://pnpm.io), [Node.js](https://nodejs.org), `git`, `rsync`, and [Claude Code](https://claude.com/claude-code).
+[pnpm](https://pnpm.io), [Node.js](https://nodejs.org), `rsync`, and [Claude Code](https://claude.com/claude-code).
 
 ## Customizing
 

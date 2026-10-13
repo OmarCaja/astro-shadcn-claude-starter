@@ -1,25 +1,21 @@
 #!/usr/bin/env bash
-# Usage: ./new-project.sh <path/to/project-name>   (e.g. ~/p/my-site or ../my-site)
-# Scaffolds an Astro + shadcn project at that path, then copies the skills/MCP config into it.
+# Usage: ./new-project.sh   (run once, in a fresh repo created from this template)
+# Scaffolds Astro + shadcn into this folder (named after it), keeps the skills/MCP config,
+# and removes the template-only files.
 set -euo pipefail
 
-target="${1:?Usage: ./new-project.sh <path/to/project-name>}"
-src="$(cd "$(dirname "$0")" && pwd)"
+cd "$(dirname "$0")"
+name="$(basename "$PWD")"
+[ -e package.json ] && { echo "Already set up"; exit 1; }
 
-mkdir -p "$(dirname "$target")"
-parent="$(cd "$(dirname "$target")" && pwd)"
-name="$(basename "$target")"
-dest="$parent/$name"
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
 
-[ "$dest" = "$src" ] && { echo "Target can't be the template folder"; exit 1; }
-[ -e "$dest" ] && { echo "$dest already exists"; exit 1; }
+pnpm dlx shadcn@latest init -t astro -b base --no-monorepo -p maia -n "$name" --cwd "$tmp"
 
-pnpm dlx shadcn@latest init -t astro -b base --no-monorepo -p maia -n "$name" --cwd "$parent"
+rm -f README.md CLAUDE.md LICENSE .claude/settings.json new-project.sh
+rsync -a --ignore-existing --exclude .git "$tmp/$name/" ./
 
-rsync -a --exclude .git --exclude README.md --exclude CLAUDE.md --exclude LICENSE --exclude .gitignore --exclude new-project.sh --exclude .claude/settings.json "$src/" "$dest/"
-
-cd "$dest"
-git init -q
 pnpm add gsap
 
-echo "Done: $dest"
+echo "Done. Run /init in Claude Code to generate this project's CLAUDE.md."
