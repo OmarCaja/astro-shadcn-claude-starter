@@ -19,6 +19,7 @@ Astro site with shadcn/ui, Tailwind and GSAP. Package manager: **pnpm**.
 - `impeccable`: design, critique, polish or audit any UI. Default choice for design work.
 - `design-taste-frontend`: new landing pages or redesigns that must not look templated.
 - `web-design-guidelines`: review UI code for accessibility and best practices before shipping.
+- `modern-web-guidance`: look up current HTML/CSS/client-side JS patterns (dialogs, popovers, view transitions, container queries, forms, CWV) before writing them.
 - `gsap-core`, `gsap-timeline`, `gsap-scrolltrigger`, `gsap-utils`, `gsap-plugins`, `gsap-performance`: animation work. `gsap-react` / `gsap-frameworks` only apply inside React islands.
 
 ## Conventions

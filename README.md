@@ -66,6 +66,7 @@ Run `/init` inside the new project to generate its own `CLAUDE.md`.
 | `impeccable` | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) · [site](https://impeccable.style/) | Design, critique, polish and audit UI |
 | `design-taste-frontend` | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) · [site](https://www.tasteskill.dev/) | Landing pages that don't look templated |
 | `web-design-guidelines` | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Accessibility and UX review before shipping |
+| `modern-web-guidance` | [GoogleChrome/modern-web-guidance](https://github.com/GoogleChrome/modern-web-guidance) | Current HTML/CSS/JS platform patterns |
 | `gsap-*` (8 skills) | [greensock/gsap-skills](https://github.com/greensock/gsap-skills) | Core, timeline, ScrollTrigger, plugins, utils, performance, React, frameworks |
 
 Skills live in `.agents/skills/` and are symlinked into `.claude/skills/`. Versions are pinned in `skills-lock.json`.
